@@ -1,1 +1,166 @@
-
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="個人介紹、專業經歷、作品與教學講義">
+  <title>我的個人網站｜個人介紹與教學資源</title>
+  <style>
+    :root {
+      --accent: #ad513c; /* 修改這裡，就能更改左側選單主色 */
+      --accent-deep: #8f3c2c;
+      --text: #30343c;
+      --muted: #69717a;
+      --line: #e6e7eb;
+      --paper: #ffffff;
+      --soft: #f8f6f4;
+      --sidebar-width: 260px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--text); background: var(--paper); font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; line-height: 1.75; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #f8b9a6; outline-offset: 4px; }
+    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: var(--sidebar-width); padding: 38px 23px; background: var(--accent); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; box-shadow: 6px 0 24px #1f202214; }
+    .avatar { width: 148px; height: 148px; border: 9px solid #ffffff52; display: grid; place-items: center; border-radius: 100%; background: #ffffff1f; color: #fff; font-size: 44px; font-weight: 800; letter-spacing: .05em; margin-bottom: 28px; user-select: none; }
+    /* 要改成照片，可將上方區塊改成 <img class="avatar" src="profile.jpg" alt="個人照片"> */
+    nav { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+    nav a { color: #fff; text-decoration: none; opacity: .72; font-weight: 800; letter-spacing: .09em; padding: 8px 12px; border-radius: 8px; text-align: center; width: 100%; transition: .2s; }
+    nav a:hover, nav a.active { opacity: 1; background: #ffffff1d; }
+    .site-header { display: none; }
+    main { margin-left: var(--sidebar-width); }
+    section { padding: 80px clamp(24px, 6vw, 90px); border-bottom: 1px solid var(--line); min-height: 70vh; scroll-margin-top: 70px; }
+    section:first-child { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: .85rem; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(2.4rem, 5vw, 5rem); line-height: 1.15; letter-spacing: -.04em; margin-bottom: 20px; }
+    h2 { font-size: clamp(2.1rem, 3.6vw, 3.25rem); line-height: 1.22; letter-spacing: -.025em; margin-bottom: 16px; }
+    h3 { font-size: 1.35rem; line-height: 1.4; margin-bottom: 8px; }
+    .subtitle { color: var(--accent); font-weight: 750; font-size: 1.15rem; margin-bottom: 22px; }
+    .lead { color: #515963; font-size: 1.12rem; max-width: 730px; }
+    .section-desc { color: var(--muted); margin-bottom: 34px; }
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 28px; }
+    .pill { background: #f2e9e5; color: var(--accent-deep); padding: 7px 14px; border-radius: 50px; font-size: .9rem; font-weight: 700; }
+    .action { align-self: flex-start; display: inline-flex; gap: 7px; text-decoration: none; align-items: center; padding: 11px 18px; background: var(--accent); border-radius: 9px; color: #fff; font-weight: 750; }
+    .action:hover { background: var(--accent-deep); }
+    .entry { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .entry:last-child { border-bottom: 0; }
+    .entry p { color: var(--muted); margin-bottom: 0; }
+    .date { color: var(--accent); font-size: .95rem; font-weight: 800; white-space: nowrap; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #fff; box-shadow: 0 8px 24px #252a3108; transition: transform .2s,box-shadow .2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 34px #252a3116; }
+    .cover { height: 138px; display: grid; place-items: center; background: linear-gradient(135deg, #b96650, #6f3a53); color: white; font-size: 3rem; }
+    .cover.blue { background: linear-gradient(135deg, #416788, #223f62); }
+    .cover.green { background: linear-gradient(135deg, #467c73, #235048); }
+    .cover.gold { background: linear-gradient(135deg, #b38a45, #89602d); }
+    .card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .card-body p { color: var(--muted); font-size: .94rem; flex: 1; margin-bottom: 16px; }
+    .card-link { color: var(--accent); text-decoration: none; font-weight: 800; }
+    .card-link:hover { text-decoration: underline; }
+    .tag { background: var(--soft); border: 1px solid #ebe1dd; color: #7a5a50; border-radius: 6px; padding: 2px 8px; font-size: .78rem; font-weight: 700; }
+    .tag-row { margin: 10px 0 14px; display: flex; gap: 6px; flex-wrap: wrap; }
+    footer { padding: 24px clamp(24px, 6vw, 90px); color: var(--muted); font-size: .9rem; margin-left: var(--sidebar-width); }
+    @media (max-width: 980px) {
+      .sidebar { display: none; }
+      .site-header { display: flex; position: sticky; top: 0; z-index: 12; align-items: center; justify-content: space-between; height: 66px; padding: 0 20px; background: var(--accent); color: #fff; box-shadow: 0 2px 14px #0002; }
+      .site-header strong { font-size: 1.05rem; }
+      .menu-btn { color: #fff; background: #ffffff24; border: 1px solid #ffffff60; border-radius: 8px; padding: 8px 12px; font-size: 1.25rem; cursor: pointer; }
+      .mobile-menu { position: fixed; top: 66px; left: 0; right: 0; z-index: 11; display: none; background: var(--accent-deep); padding: 10px 20px 18px; box-shadow: 0 10px 20px #0002; }
+      .mobile-menu.open { display: flex; flex-direction: column; }
+      .mobile-menu a { color: #fff; padding: 8px 4px; font-weight: 700; text-decoration: none; }
+      main, footer { margin-left: 0; }
+      section { padding: 55px 24px; min-height: auto; }
+      section:first-child { min-height: 74vh; }
+    }
+    @media (max-width: 570px) { .entry { display: block; } .date { display: block; margin-top: 10px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card { transition: none; } }
+  </style>
+</head>
+<body>
+  <!-- 左側導覽列：修改顯示文字不影響各區段的 id -->
+  <aside class="sidebar" aria-label="網站導覽">
+    <div class="avatar" aria-label="個人照片位置">ME</div>
+    <nav>
+      <a class="active" href="#about">ABOUT 關於我</a>
+      <a href="#experience">EXPERIENCE 經歷</a>
+      <a href="#credential">CREDENTIAL 專業技能</a>
+      <a href="#demo">DEMO 作品展示</a>
+      <a href="#handout">HANDOUT 教學講義</a>
+      <a href="#contact">CONTACT 聯絡方式</a>
+    </nav>
+  </aside>
+  <header class="site-header">
+    <strong>MY PORTFOLIO</strong>
+    <button id="menuToggle" class="menu-btn" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟導覽選單">☰</button>
+  </header>
+  <nav id="mobileMenu" class="mobile-menu" aria-label="行動版導覽">
+    <a href="#about">關於我</a><a href="#experience">經歷</a><a href="#credential">專業技能</a><a href="#demo">作品展示</a><a href="#handout">教學講義</a><a href="#contact">聯絡方式</a>
+  </nav>
+  <main>
+    <section id="about">
+      <div class="eyebrow">Welcome to my website</div>
+      <h1>你好，歡迎來到<br><span style="color:var(--accent)">我的個人網站</span></h1>
+      <p class="subtitle">資訊技術 × 教育訓練 × 數位應用</p>
+      <p class="lead">這裡是個人網站範例。你可以把這段改成自己的姓名、專長、教學理念及服務內容，並使用下方區塊集中展示經歷、作品和課程教材。</p>
+      <div class="pill-row"><span class="pill">專業介紹</span><span class="pill">實務作品</span><span class="pill">教學資源</span></div>
+      <a class="action" href="#handout">查看教學講義 →</a>
+    </section>
+    <section id="experience">
+      <div class="eyebrow">Experience</div><h2>專業經歷</h2>
+      <p class="section-desc">將這裡替換成你想公開的工作經歷、授課經驗或主要專案。</p>
+      <div class="entry"><div><h3>經歷範例｜資訊專案與技術服務</h3><p>說明負責的專案、提供的服務及重要成果。這是示範文字，請自行修改。</p></div><div class="date">年份／期間</div></div>
+      <div class="entry"><div><h3>經歷範例｜教育訓練與課程規劃</h3><p>說明授課領域、培訓對象及課程特色。這是示範文字，請自行修改。</p></div><div class="date">年份／期間</div></div>
+    </section>
+    <section id="credential">
+      <div class="eyebrow">Credential</div><h2>專業技能與證照</h2><p class="section-desc">可放專業技能、專業證照、授課資格或代表性成就。</p>
+      <div class="pill-row"><span class="pill">資料分析</span><span class="pill">Python</span><span class="pill">人工智慧應用</span><span class="pill">資訊技術</span><span class="pill">教育訓練</span></div>
+      <p style="color:var(--muted)">本區內容為範例，請只填入你實際擁有的技能、資格或成就。</p>
+    </section>
+    <section id="demo">
+      <div class="eyebrow">Demo</div><h2>作品展示</h2><p class="section-desc">放上你完成的網站、互動工具、報表或教學示範作品。</p>
+      <div class="card-grid">
+        <article class="card"><div class="cover blue">▤</div><div class="card-body"><h3>Power BI 視覺化範例</h3><p>可放作品截圖、功能介紹與公開展示網址。</p><span class="tag">待新增作品連結</span></div></article>
+        <article class="card"><div class="cover green">⌘</div><div class="card-body"><h3>Python 工具展示</h3><p>可放你自行製作的工具、程式與實作成果。</p><span class="tag">待新增作品連結</span></div></article>
+        <article class="card"><div class="cover gold">◇</div><div class="card-body"><h3>AI 應用作品</h3><p>可放 AI 應用案例、流程示範或影片介紹。</p><span class="tag">待新增作品連結</span></div></article>
+      </div>
+    </section>
+    <section id="handout">
+      <div class="eyebrow">Handout</div><h2>教學講義</h2><p class="section-desc">這是對照參考網站的 Handout 區塊。日後只要把標題、介紹和連結改成自己的教材即可。</p>
+      <div class="card-grid">
+        <article class="card"><div class="cover blue">📊</div><div class="card-body"><h3>Power BI 視覺化數據分析</h3><div class="tag-row"><span class="tag">資料分析</span><span class="tag">Power BI</span></div><p>課程講義、操作示範、資料清理與視覺化報表。</p><span class="tag">待新增教材網址</span></div></article>
+        <article class="card"><div class="cover green">🐍</div><div class="card-body"><h3>Python 程式設計</h3><div class="tag-row"><span class="tag">程式設計</span></div><p>入門語法、練習題、程式範例與課堂資源。</p><span class="tag">待新增教材網址</span></div></article>
+        <article class="card"><div class="cover gold">✦</div><div class="card-body"><h3>AI 應用與實作</h3><div class="tag-row"><span class="tag">AI</span><span class="tag">教學資源</span></div><p>人工智慧工具介紹、應用案例與實作說明。</p><span class="tag">待新增教材網址</span></div></article>
+      </div>
+      <!-- 連結使用範例：<a class="card-link" href="https://你的教材網址" target="_blank" rel="noopener noreferrer">開啟講義 ↗</a> -->
+    </section>
+    <section id="contact">
+      <div class="eyebrow">Contact</div><h2>聯絡方式</h2><p class="section-desc">請自行填寫想公開的聯絡方式，例如業務信箱、LinkedIn 或社群媒體。</p>
+      <p>可在這裡介紹合作、授課或交流方式。</p>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> 我的個人網站．使用 GitHub Pages 發布。</footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    btn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      btn.setAttribute('aria-label', isOpen ? '關閉導覽選單' : '開啟導覽選單');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }));
+    const links = [...document.querySelectorAll('.sidebar nav a')];
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(link => link.classList.toggle('active', link.hash === '#' + entry.target.id));
+      });
+    }, { rootMargin: '-30% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
